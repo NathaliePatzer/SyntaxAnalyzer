@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analisador Sintático 📝</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/jquery.magnific-popup.min.js"
+      integrity="sha512-fCRpXk4VumjVNtE0j+OyOqzPxF1eZwacU3kN3SsznRPWHgMTSSo7INc8aY03KQDBWztuMo5KjKzCFXI/a5rVYQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.2.0/magnific-popup.min.css"
+      integrity="sha512-lvaVbvmbHhG8cmfivxLRhemYlTT60Ly9Cc35USrpi8/m+Lf/f/T8x9kEIQq47cRj1VQIFuxTxxCcvqiQeQSHjQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1 class="title">Analisador Sintático Top-Down Preditivo Tabular</h1>
+      <div id="inputs">
+        <label for="words">Digite a palavra</label>
+        <input type="text" name="words" id="words" />
+        <div class="buttons-align"> 
+            <button class="button" id="button-verify">Verificar</button>
+            <button class="button" id="button-grammar">Ver Gramática</button>
+            <button class="button" id="button-ff">Ver First & Follow</button>
+            <button class="button" id="button-sentence">Gerar Sentença</button>
+        </div>
+      </div>
+      <div id="parsing-table">
+        <label for="none">Tabela de Parsing</label>
+        <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" class="column_noTerminal">Não Terminal</th>
+              <th scope="col" class="column_a">a</th>
+              <th scope="col" class="column_b">b</th>
+              <th scope="col" class="column_c">c</th>
+              <th scope="col" class="column_d">d</th>
+              <th scope="col" class="column_$">$</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row">
+              <td class="column_S">S</td>
+              <td class="column_a">S → aA</td>
+              <td class="column_b">S → bB</td>
+              <td class="column_c">-</td>
+              <td class="column_d">-</td>
+              <td class="column_$">-</td>
+            </tr>
+            <tr class="row">
+              <td class="column_A">A</td>
+              <td class="column_a">-</td>
+              <td class="column_b">A → bA</td>
+              <td class="column_c">A → cC</td>
+              <td class="column_d">A → dD</td>
+              <td class="column_$">-</td>
+            </tr>
+            <tr class="row">
+              <td class="column_B">B</td>
+              <td class="column_a">-</td>
+              <td class="column_b">-</td>
+              <td class="column_c">B → cS</td>
+              <td class="column_d">B → dDA</td>
+              <td class="column_$">-</td>
+            </tr>
+            <tr class="row">
+              <td class="column_C">C</td>
+              <td class="column_a">C → aS</td>
+              <td class="column_b">C → ε</td>
+              <td class="column_c">-</td>
+              <td class="column_d">-</td>
+              <td class="column_$">C → ε</td>
+            </tr>
+            <tr class="row">
+              <td class="column_D">D</td>
+              <td class="column_a">-</td>
+              <td class="column_b">-</td>
+              <td class="column_c">D → cCb</td>
+              <td class="column_d">-</td>
+              <td class="column_$">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      <div class="buttons-execution">
+        <div class="buttons-align">
+            <button class="button" id="button-step">Passo a Passo</button>
+            <button class="button" id="button-execute">Execução Completa</button>
+            <button class="button" id="button-clear">Limpar</button>
+        </div>
+      </div>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" class="column_stack">Pilha</th>
+              <th scope="col" class="column_entry">Entrada</th>
+              <th scope="col" class="column_action">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row">
+              <td class="column_stack">$</td>
+              <td class="column_entry">-</td>
+              <td class="column_action">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <div id="success-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>☺️</h2>
+        <p>Aceito em X passos!</p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div id="fail-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>🙁</h2>
+        <p>Rejeitado em X passos!</p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div id="empty-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>👩🏼‍💻</h2>
+        <p>Digite algo...</p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div id="char-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>🚫</h2>
+        <p></p>
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </body>
+</html>
