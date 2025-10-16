@@ -41,14 +41,14 @@ body {
   border: none;
   border-radius: 5px;
   margin-top: 8px;
-  background-color: rgba(96, 218, 96, 0.751);
+  background-color: rgba(3, 218, 198, 0.751); 
   font-size: 14px;
   cursor: pointer;
   font-weight: bold;
 }
 
 .button:hover {
-  background-color: rgba(67, 155, 67, 0.751);
+  background-color: rgba(0, 176, 156, 0.751);
   color: #c9d1d9;
 }
 
@@ -83,6 +83,11 @@ table {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   overflow: hidden;
+}
+
+.grammar-table {
+  display: flex;
+  place-content: center;
 }
 
 th,
@@ -141,9 +146,6 @@ th:first-child {
 }
 
 .mfp-content {
-  width: 300px !important;
-  background: #83379c;
-  border: 4px solid #552864;
   padding: 30px;
   border-radius: 10px;
   position: relative;
@@ -152,7 +154,23 @@ th:first-child {
   color: #c9d1d9;
 }
 
-.mfp-content h2, .mfp-content p {
+.mfp-content:has(#success-popup),
+.mfp-content:has(#fail-popup),
+.mfp-content:has(#empty-popup),
+.mfp-content:has(#char-popup) {
+  width: 300px !important;
+  background: #83379c;
+  border: 4px solid #552864;
+}
+
+.mfp-content:has(#grammar-popup) {
+  width: 1000px !important;
+  background: #5E35B1;
+  border: 4px solid #3a206d;
+}
+
+.mfp-content h2,
+.mfp-content p {
   margin-bottom: 10px;
   text-align: center;
 }
@@ -162,7 +180,7 @@ th:first-child {
   bottom: 0;
   left: 0;
   height: 6px;
-  background-color:#c9d1d9;
+  background-color: #c9d1d9;
   animation: progressBarAnim 4s linear forwards;
 }
 
@@ -176,11 +194,16 @@ th:first-child {
 }
 
 .buttons-align {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
 }
 
 .buttons-execution {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.column_button_click:hover {
+  cursor: pointer;
+  background-color: #505a65;
 }

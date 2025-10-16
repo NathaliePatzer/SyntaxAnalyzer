@@ -27,77 +27,77 @@
       <div id="inputs">
         <label for="words">Digite a palavra</label>
         <input type="text" name="words" id="words" />
-        <div class="buttons-align"> 
-            <button class="button" id="button-verify">Verificar</button>
-            <button class="button" id="button-grammar">Ver Gramática</button>
-            <button class="button" id="button-ff">Ver First & Follow</button>
-            <button class="button" id="button-sentence">Gerar Sentença</button>
+        <div class="buttons-align">
+          <button class="button" id="button-verify">Verificar</button>
+          <button class="button" id="button-grammar">Ver Gramática</button>
+          <button class="button" id="button-ff">Ver First & Follow</button>
+          <button class="button" id="button-sentence">Gerar Sentença</button>
         </div>
       </div>
       <div id="parsing-table">
         <label for="none">Tabela de Parsing</label>
         <div class="table">
-        <table>
-          <thead>
-            <tr>
-              <th scope="col" class="column_noTerminal">Não Terminal</th>
-              <th scope="col" class="column_a">a</th>
-              <th scope="col" class="column_b">b</th>
-              <th scope="col" class="column_c">c</th>
-              <th scope="col" class="column_d">d</th>
-              <th scope="col" class="column_$">$</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="row">
-              <td class="column_S">S</td>
-              <td class="column_a">S → aA</td>
-              <td class="column_b">S → bB</td>
-              <td class="column_c">-</td>
-              <td class="column_d">-</td>
-              <td class="column_$">-</td>
-            </tr>
-            <tr class="row">
-              <td class="column_A">A</td>
-              <td class="column_a">-</td>
-              <td class="column_b">A → bA</td>
-              <td class="column_c">A → cC</td>
-              <td class="column_d">A → dD</td>
-              <td class="column_$">-</td>
-            </tr>
-            <tr class="row">
-              <td class="column_B">B</td>
-              <td class="column_a">-</td>
-              <td class="column_b">-</td>
-              <td class="column_c">B → cS</td>
-              <td class="column_d">B → dDA</td>
-              <td class="column_$">-</td>
-            </tr>
-            <tr class="row">
-              <td class="column_C">C</td>
-              <td class="column_a">C → aS</td>
-              <td class="column_b">C → ε</td>
-              <td class="column_c">-</td>
-              <td class="column_d">-</td>
-              <td class="column_$">C → ε</td>
-            </tr>
-            <tr class="row">
-              <td class="column_D">D</td>
-              <td class="column_a">-</td>
-              <td class="column_b">-</td>
-              <td class="column_c">D → cCb</td>
-              <td class="column_d">-</td>
-              <td class="column_$">-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" class="column_noTerminal">Não Terminal</th>
+                <th scope="col" class="column_a">a</th>
+                <th scope="col" class="column_b">b</th>
+                <th scope="col" class="column_c">c</th>
+                <th scope="col" class="column_d">d</th>
+                <th scope="col" class="column_$">$</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row">
+                <td class="column_S">S</td>
+                <td class="column_a">S → aA</td>
+                <td class="column_b">S → bB</td>
+                <td class="column_c">-</td>
+                <td class="column_d">-</td>
+                <td class="column_$">-</td>
+              </tr>
+              <tr class="row">
+                <td class="column_A">A</td>
+                <td class="column_a">-</td>
+                <td class="column_b">A → bA</td>
+                <td class="column_c">A → cC</td>
+                <td class="column_d">A → dD</td>
+                <td class="column_$">-</td>
+              </tr>
+              <tr class="row">
+                <td class="column_B">B</td>
+                <td class="column_a">-</td>
+                <td class="column_b">-</td>
+                <td class="column_c">B → cS</td>
+                <td class="column_d">B → dDA</td>
+                <td class="column_$">-</td>
+              </tr>
+              <tr class="row">
+                <td class="column_C">C</td>
+                <td class="column_a">C → aS</td>
+                <td class="column_b">C → ε</td>
+                <td class="column_c">-</td>
+                <td class="column_d">-</td>
+                <td class="column_$">C → ε</td>
+              </tr>
+              <tr class="row">
+                <td class="column_D">D</td>
+                <td class="column_a">-</td>
+                <td class="column_b">-</td>
+                <td class="column_c">D → cCb</td>
+                <td class="column_d">-</td>
+                <td class="column_$">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="buttons-execution">
         <div class="buttons-align">
-            <button class="button" id="button-step">Passo a Passo</button>
-            <button class="button" id="button-execute">Execução Completa</button>
-            <button class="button" id="button-clear">Limpar</button>
+          <button class="button" id="button-step">Passo a Passo</button>
+          <button class="button" id="button-execute">Execução Completa</button>
+          <button class="button" id="button-clear">Limpar</button>
         </div>
       </div>
       <div class="table">
@@ -149,6 +149,48 @@
         <h2>🚫</h2>
         <p></p>
         <div class="progress-bar"></div>
+      </div>
+    </div>
+
+    <div id="grammar-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>Gramática</h2>
+        <div class="grammar-table">
+          <table>
+            <tbody>
+              <tr class="row_S">
+                <td class="column_no_terminal">S :: =</td>
+                <td class="column_button_click">aA</td>
+                <td class="column_button_click">bB</td>
+                <td class="column_action"></td>
+              </tr>
+               <tr class="row_A">
+                <td class="column_no_terminal">A :: =</td>
+                <td class="column_button_click">cC</td>
+                <td class="column_button_click">dD</td>
+                <td class="column_button_click">bA</td>
+              </tr>
+              <tr class="row_B">
+                <td class="column_no_terminal">B :: =</td>
+                <td class="column_button_click">cS</td>
+                <td class="column_button_click">dDA</td>
+                <td class="column_action"></td>
+              </tr>
+              <tr class="row_C">
+                <td class="column_no_terminal">C :: =</td>
+                <td class="column_button_click">aS</td>
+                <td class="column_button_click">ε</td>
+                <td class="column_action"></td>
+              </tr>
+               <tr class="row_D">
+                <td class="column_no_terminal">D :: =</td>
+                <td class="column_button_click">cCb</td>
+                <td class="column_action"></td>
+                <td class="column_action"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>
