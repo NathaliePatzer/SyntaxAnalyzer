@@ -1,5 +1,101 @@
 $(document).ready(function () {
 
+    var cont = 0;
+    var inputStack = [];
+    var stack = [];
+    var parsingTable = {
+        "S": {
+            "a": "aA",
+            "b": "bB",
+        },
+        "A": {
+            "b": "bA",
+            "c": "cC",
+            "d": "dD",
+        },
+        "B": {
+            "c": "cS",
+            "d": "dDA",
+        },
+        "C": {
+            "a": "aS",
+            "b": "ε",
+            "$": "ε"
+        },
+        "D": {
+            "c": "cCb",
+        }
+    };
+
+    function createInputStack(inputString) {
+        //Converte a string em um array de caracteres:
+        let charArray = [...inputString];
+
+        //Inverte a ordem do array:
+        let reversedArray = charArray.reverse();
+
+        //Retorna um novo array começando com "$" seguido pelos elementos do array invertido:
+        return ['$', ...reversedArray];
+    }
+
+    function sintaxAnalyzer() {
+        var stackItem = stack.pop();
+        var inputStackItem = inputStack[inputStack.length - 1];
+
+        console.log(stackItem);
+        console.log(inputStackItem);
+        console.log(inputStack);
+        console.log(stack);
+
+        if (stackItem == inputStackItem) {
+            if (stackItem == "$") {
+                alert("aceito em X passos");
+            }else{
+                alert("ler");
+            }
+        } else {
+            if (stackItem in parsingTable) {
+                alert("esta na parsing table");
+                if (inputStackItem in parsingTable[stackItem]) {
+                    alert("tem na parsing table");
+                } else {
+                    alert("erro (topo da pilha não esta na parsing table");
+                }
+            } else {
+                alert("erro (topo da pilha não esta na parsing table");
+            }
+        }
+    }
+
+    //Criar a pilha da entrada 
+    $("#button-execute").click(function () {
+        if ($("#words").val().trim() != "") {
+            cont = 0;
+            stack[0] = "$";
+            stack[1] = "S";
+
+            inputStack = createInputStack($("#words").val());
+            sintaxAnalyzer();
+
+        } else {
+            $.magnificPopup.open({
+                items: {
+                    src: '#empty-popup',
+                    type: 'inline'
+                },
+                callbacks: {
+                    open: function () {
+                        setTimeout(function () {
+                            $.magnificPopup.close();
+                        }, 4000);
+                    }
+                },
+                removalDelay: 300,
+                mainClass: 'mfp-fade'
+            });
+        }
+    });
+
     //popup da gramática
     $("#button-grammar").click(function () {
         $.magnificPopup.open({
