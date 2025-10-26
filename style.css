@@ -47,7 +47,6 @@ body {
 }
 
 .disabled-button {
-  
   cursor: not-allowed !important;
   background-color: #5d6268 !important;
   color: #c9d1d9 !important;

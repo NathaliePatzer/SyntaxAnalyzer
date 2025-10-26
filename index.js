@@ -23,6 +23,35 @@ $(document).ready(function () {
         }
     }
 
+    //verificar caracteres digitados 
+    $("#words").keydown(function (event) {
+        var text = $("#words").val();
+        console.log(event.key + ":" + event.keyCode)
+        if ((event.keyCode < 65 || event.keyCode > 68) && event.keyCode != 8) {
+            if (event.key == " ") {
+                $("#char-popup p").html("Caractere inválido: Espaço");
+            } else {
+                $("#char-popup p").html("Caractere inválido: " + event.key);
+            }
+            $.magnificPopup.open({
+                items: {
+                    src: '#char-popup',
+                    type: 'inline'
+                },
+                callbacks: {
+                    open: function () {
+                        setTimeout(function () {
+                            $.magnificPopup.close();
+                        }, 4000);
+                    }
+                },
+                removalDelay: 300,
+                mainClass: 'mfp-fade'
+            });
+            event.preventDefault();
+        }
+    });
+
     $("#button-select-grammar").click(function () {
         if ($(this).hasClass('disabled-button')) {
             return;
