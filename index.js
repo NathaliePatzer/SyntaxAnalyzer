@@ -12,7 +12,25 @@ $(document).ready(function () {
         //setar estado inicial da gramatica
         $(".row_S").attr('id', "greenLine");
         $("#sentence-input").val("S");
+        $("#button-select-grammar").addClass("disabled-button");
     });
+
+    function grammarReady(text) {
+        let result = text.match(/[A-Z]/);
+
+        if (result === null) {
+            $("#button-select-grammar").removeClass("disabled-button");
+        }
+    }
+
+    $("#button-select-grammar").click(function () {
+        if ($(this).hasClass('disabled-button')) {
+            return;
+        }
+        $("#words").val($("#sentence-input").val());
+        $.magnificPopup.close();
+    });
+
 
     //conteudo clicado
     $(".column_button_click").click(function () {
@@ -32,6 +50,7 @@ $(document).ready(function () {
 
             if (token === 'ε') {
                 var output = input.replace(line, '');
+                grammarReady(output);
             } else {
                 var output = input.replace(line, token);
             }
