@@ -38,8 +38,20 @@ $(document).ready(function () {
         return ['$', ...reversedArray];
     }
 
+    function stackToString(stack) {
+        // Primeiro, revertemos o array para que a ordem fique correta.
+        // Ex: ['$', 'd', 'c', 'b', 'a'] se torna ['a', 'b', 'c', 'd', '$']
+        const reversedArray = stack.slice().reverse();
+
+        // Depois, juntamos todos os elementos do array revertido em uma única string.
+        const resultString = reversedArray.join('');
+
+        return resultString;
+    }
+
     function sintaxAnalyzer() {
-        var stackItem = stack.pop();
+        cont++;
+        var stackItem = stack[stack.length - 1];
         var inputStackItem = inputStack[inputStack.length - 1];
 
         console.log(stackItem);
@@ -49,20 +61,66 @@ $(document).ready(function () {
 
         if (stackItem == inputStackItem) {
             if (stackItem == "$") {
-                alert("aceito em X passos");
-            }else{
-                alert("ler");
+                var tableEntry = `<tr class="row">
+                    <td class="column_stack">${stack.join('')}</td>
+                    <td class="column_entry">${stackToString(inputStack)}</td>
+                    <td class="column_action">Aceito em ${cont} passos</td>
+                </tr>`;
+                stack.pop();
+                inputStack.pop();
+                $("#resolutionTableBody").append(tableEntry);
+                //alert("aceito em X passos");
+            } else {
+                var tableEntry = `<tr class="row">
+                    <td class="column_stack">${stack.join('')}</td>
+                    <td class="column_entry">${stackToString(inputStack)}</td>
+                    <td class="column_action">Ler ${inputStackItem}</td>
+                </tr>`;
+                stack.pop();
+                inputStack.pop();
+                $("#resolutionTableBody").append(tableEntry);
+                //alert("ler");
+                sintaxAnalyzer();
             }
         } else {
             if (stackItem in parsingTable) {
-                alert("esta na parsing table");
+                //alert("esta na parsing table");
                 if (inputStackItem in parsingTable[stackItem]) {
-                    alert("tem na parsing table");
+                    var tableEntry = `<tr class="row">
+                        <td class="column_stack">${stack.join('')}</td>
+                        <td class="column_entry">${stackToString(inputStack)}</td>
+                        <td class="column_action">${stackItem} → ${parsingTable[stackItem][inputStackItem]}</td>
+                    </tr>`;
+
+                    stack.pop();
+                    let productionRule = parsingTable[stackItem][inputStackItem];
+
+                    if (productionRule !== "ε") {
+                        for (let i = productionRule.length - 1; i >= 0; i--) {
+                            // Empilhamos cada caractere
+                            stack.push(productionRule[i]);
+                        }
+                    }
+                    $("#resolutionTableBody").append(tableEntry);
+                    //alert("tem na parsing table");
+                    sintaxAnalyzer();
                 } else {
-                    alert("erro (topo da pilha não esta na parsing table");
+                    var tableEntry = `<tr class="row">
+                        <td class="column_stack">${stack.join('')}</td>
+                        <td class="column_entry">${stackToString(inputStack)}</td>
+                        <td class="column_action">Erro em ${cont} passos</td>
+                    </tr>`;
+                    $("#resolutionTableBody").append(tableEntry);
+                    //alert("erro (topo da pilha não esta na parsing table");
                 }
             } else {
-                alert("erro (topo da pilha não esta na parsing table");
+                var tableEntry = `<tr class="row">
+                    <td class="column_stack">${stack.join('')}</td>
+                    <td class="column_entry">${stackToString(inputStack)}</td>
+                    <td class="column_action">Erro em ${cont} passos</td>
+                </tr>`;
+                $("#resolutionTableBody").append(tableEntry);
+                //alert("erro (topo da pilha não esta na parsing table");
             }
         }
     }
@@ -75,6 +133,8 @@ $(document).ready(function () {
             stack[1] = "S";
 
             inputStack = createInputStack($("#words").val());
+
+            $("#resolutionTableBody").html("");
             sintaxAnalyzer();
 
         } else {

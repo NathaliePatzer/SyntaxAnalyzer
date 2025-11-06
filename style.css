@@ -239,4 +239,5 @@ th:first-child {
 .column_button_click:hover {
   cursor: pointer;
   background-color: #505a65;
+  color: #5fa87e;
 }
