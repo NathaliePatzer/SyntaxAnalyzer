@@ -5,8 +5,8 @@ Este projeto implementa um analisador sintático LL(1) baseado em pilha e tabela
 A interface permite:
 * Inserir uma palavra ✏️
 * Gerar uma sentença dinamicamente através da gramática, escolhendo a sequência de passos 📝
-* Visualizar os conjuntos First & Follow
-* Visualizar a tabela de Parsing
+* Visualizar os conjuntos First & Follow 🔢
+* Visualizar a tabela de Parsing 📖
 * Visualizar a evolução da pilha e da entrada 🧱➡️📥
 * Ver qual regra gramatical foi aplicada a cada passo 🔁
 * Identificar se a palavra é aceita ✅ ou rejeitada ❌
@@ -34,8 +34,6 @@ O algoritmo segue estes passos:
 É possível acessar o analisador através do link **https://nathaliepatzer.github.io/SyntaxAnalyzer/**.
 
 Se desejar, você também pode clonar o repositório e testar localmente 😊
-
----
 
 ## 👩🏼‍💻 Para saber mais
 
@@ -73,4 +71,4 @@ Com ela → ele escolhe diretamente a produção correta ✔️
 
 💬 Qualquer dúvida, sugestão ou melhoria é super bem-vinda — é só entrar em contato!
 
-***🤖 May the parse be with you***
+🤖 ***May the parse be with you***
