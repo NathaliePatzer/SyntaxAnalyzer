@@ -82,7 +82,7 @@ $(document).ready(function () {
 
             sintaxAnalyzer(true);
             countSteps++;
-        } else if (isFinished){
+        } else if (isFinished) {
             $.magnificPopup.open({
                 items: {
                     src: '#finished-popup',
@@ -214,7 +214,7 @@ $(document).ready(function () {
             $("#resolutionTableBody").html("");
             sintaxAnalyzer(false);
 
-        } else if (isFinished){
+        } else if (isFinished) {
             $.magnificPopup.open({
                 items: {
                     src: '#finished-popup',
@@ -300,6 +300,15 @@ $(document).ready(function () {
             });
             event.preventDefault();
         }
+    });
+
+    $("#button-ff").click(function () {
+        $.magnificPopup.open({
+            items: {
+                src: '#ff-popup',
+                type: 'inline'
+            },
+        });
     });
 
     $("#button-select-grammar").click(function () {

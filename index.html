@@ -198,7 +198,53 @@
           </table>
         </div>
         <input type="text" name="words" id="sentence-input" readonly />
-        <button class="button disabled-button" id="button-select-grammar">Verificar</button>
+        <button class="button disabled-button" id="button-select-grammar">
+          Verificar
+        </button>
+      </div>
+    </div>
+
+    <div id="ff-popup" class="mfp-hide">
+      <div class="popup-inner">
+        <h2>First & Follow</h2>
+        <div class="ff-table">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col" class="column_nt">Não Terminal</th>
+                <th scope="col" class="column_first">First</th>
+                <th scope="col" class="column_follow">Follow</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S</td>
+                <td>a,b</td>
+                <td>$,b</td>
+              </tr>
+              <tr>
+                <td>A</td>
+                <td>c,d,b</td>
+                <td>$,b</td>
+              </tr>
+              <tr>
+                <td>B</td>
+                <td>c,d</td>
+                <td>$,b</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>a,ε</td>
+                <td>$,b</td>
+              </tr>
+              <tr>
+                <td>D</td>
+                <td>c</td>
+                <td>$,b,c,d</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </body>
