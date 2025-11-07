@@ -317,6 +317,7 @@ $(document).ready(function () {
         }
         $("#words").val($("#sentence-input").val());
         $.magnificPopup.close();
+        clear();
     });
 
 
